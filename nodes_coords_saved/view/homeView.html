@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>D3.js Force Layout</title>
+
+		<!-- General META -->
+		<meta charset="utf-8">
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+		<!-- CSS Files-->
+		<link rel="stylesheet" href="../css/homeStyle.css">
+	</head>
+
+	<body class="" ng-app="forceLayoutApp">
+		<header>
+			<nav class="navbar">
+				D3.js Force-Directed Graph - Nodes' fixed positions
+			</nav>
+		</header>
+
+		<section data-ng-controller="HomeController" class="ng-scope">
+			<h1 class="selectednode">{{selectedNode.name}}</h1>
+		</section>
+
+		<!--Application JavaScript Files-->
+		<script type="text/javascript" src="../lib/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="../lib/angular/angular.js"></script>
+		<script type="text/javascript" src="../lib/d3/d3.js"></script>
+		<script type="text/javascript" src="../js/controllers/homeController.js"></script>
+	</body>
+</html>

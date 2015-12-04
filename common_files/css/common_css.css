@@ -1,0 +1,48 @@
+.navbar {
+	background-color: rgb(34, 34, 34);
+	background-image: linear-gradient(rgb(60, 60, 60) 0%, rgb(34, 34, 34) 100%);
+	background-repeat: repeat-x;
+	border-bottom-color: rgb(8, 8, 8);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-left-color: rgb(8, 8, 8);
+	border-left-style: solid;
+	border-left-width: 0px;
+	border-right-color: rgb(8, 8, 8);
+	border-right-style: solid;
+	border-right-width: 0px;
+	border-top-color: rgb(8, 8, 8);
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-top-style: solid;
+	border-top-width: 0px;
+	box-sizing: border-box;
+	display: block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	height: 51px;
+	left: 0px;
+	line-height: 20px;
+	margin-bottom: 20px;
+	right: 0px;
+	top: 0px;
+	width: 100%;
+	color: rgb(157, 157, 157);
+	font-size : 1.5em;
+	text-align: center;
+	padding-top : 15px;
+}
+
+body {
+	margin : 0px;
+}
+
+.selectednode {
+	margin : auto;
+}
+
+svg {
+	margin : auto;
+}

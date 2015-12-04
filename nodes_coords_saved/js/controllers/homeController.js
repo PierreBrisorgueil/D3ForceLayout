@@ -15,11 +15,7 @@ forceLayoutApp.controller('HomeController', ['$scope',
                 d.x = d3.event.x;
                 d.y = d3.event.y;
             },
-            dragend : function(d) {
-                // var graphTmp = { "nodes" : $scope.graph.nodes, "links" : $scope.graph.initLinks};
-                // localStorage.setItem('graph',JSON.stringify(graphTmp));
-            },
-            click : function(d) {
+            dblclick : function(d) {
                 var nodeTmp = d;
                 localStorage.setItem('node',JSON.stringify(nodeTmp));
                 location.reload();
@@ -40,6 +36,11 @@ forceLayoutApp.controller('HomeController', ['$scope',
                 .attr("width", $scope.graph.width)
                 .attr("height", $scope.graph.height);
 
+        $scope.saveGraph = function(){
+            var graphTmp = { "nodes" : $scope.graph.nodes, "links" : $scope.graph.initLinks};
+            localStorage.setItem('graph',JSON.stringify(graphTmp));
+        };
+
         $scope.draw = function(){
             $scope.graph.force = d3.layout.force()
                     .charge(-120)
@@ -51,6 +52,10 @@ forceLayoutApp.controller('HomeController', ['$scope',
                   .links($scope.graph.links)
                   .start();
 
+            $scope.graph.force.on("end", function(){
+                $scope.saveGraph();
+            });
+
             $scope.graph.link = $scope.svg.selectAll(".link")
                 .data($scope.graph.links)
                 .enter().append("line")
@@ -58,8 +63,7 @@ forceLayoutApp.controller('HomeController', ['$scope',
                 .style({'stroke' : 'gray', 'stroke-width' : '1px'});
 
             $scope.graph.drag = $scope.graph.force.drag()
-                .on("dragstart", $scope.graph.dragstart)
-                .on("dragend", $scope.graph.dragend);
+                .on("dragstart", $scope.graph.dragstart);
 
             $scope.graph.node = $scope.svg.selectAll(".node")
                 .data($scope.graph.nodes)
@@ -68,7 +72,7 @@ forceLayoutApp.controller('HomeController', ['$scope',
                 .attr("r", 5)
                 .style("fill", function(d) { return $scope.graph.color(d.group); })
                 .call($scope.graph.drag)
-                .on("click",$scope.graph.click);
+                .on("dblclick",$scope.graph.dblclick);
 
             $scope.graph.node
                 .append("title")
@@ -85,13 +89,8 @@ forceLayoutApp.controller('HomeController', ['$scope',
                     .attr("cx", function(d) { return d.x; })
                     .attr("cy", function(d) { return d.y; });
 
-                var graphTmp = { "nodes" : $scope.graph.nodes, "links" : $scope.graph.initLinks};
-                localStorage.setItem('graph',JSON.stringify(graphTmp));
+                $scope.saveGraph();
             });
-
-            $scope.graph.force.on("stop", function(){
-                console.log("pouet");
-            })
 
         };
 
@@ -435,9 +434,6 @@ forceLayoutApp.controller('HomeController', ['$scope',
 
             $scope.graph.initLinks = angular.copy($scope.graph.links);
             $scope.draw();
-
-            var graphTmp = { "nodes" : $scope.graph.nodes, "links" : $scope.graph.initLinks};
-            localStorage.setItem('graph',JSON.stringify(graphTmp));
         } 
         else {
             var graphTmp = $.parseJSON(localStorage.getItem('graph'));
